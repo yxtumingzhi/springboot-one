@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>Hope</title>
+</head>
+<body>
+<button id="btn">点一下撒</button>
+<button id="btn2">点两下呢</button>
+<div id="content"></div>
+
+<script>
+    const data = {
+        user: 123,
+        name: "name"
+    };
+    $(function () {
+        $('#btn').click(function () {
+            $.ajax({
+                type: "post",
+                url: "http://localhost:5001/testcode",
+                async: true,
+                data: JSON.stringify(data),
+                //后台接受时使用了@RequestBody注解，需要Json字符串和指定contentType
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data);
+                    console.log(document.cookie);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+        $('#btn2').click(function () {
+            $.ajax({
+                type: "post",
+                url: "http://localhost:5002/testcode",
+                async: true,
+                crossDomain: true,
+                data: JSON.stringify(data),
+                //后台接受时使用了@RequestBody注解，需要Json字符串和指定contentType
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    console.log(document.cookie);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

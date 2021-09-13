@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hope.one.mapper.BladeNoticeMapper">
+
+    <!-- <cache /> -->
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.hope.one.entity.BladeNotice">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="title" property="title"/>
+        <result column="category" property="category"/>
+        <result column="release_time" property="releaseTime"/>
+        <result column="content" property="content"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="baseColumnList">
+        select
+        id, tenant_id, title, category, release_time, content, create_user, create_time, update_user, update_time, status, is_deleted
+    </sql>
+
+    <select id="selectById" resultMap="baseResultMap">
+        select * from blade_notice where id = #{id}
+    </select>
+
+    <update id="update">
+         update blade_notice set title = #{title} where id = #{id}
+    </update>
+
+    <insert id="insert">
+        insert into blade_notice(title, category, release_time, create_time, update_time)
+        values (#{bladeNotice.title},
+        #{bladeNotice.category},
+        #{bladeNotice.releaseTime},
+        #{bladeNotice.createTime},
+        #{bladeNotice.updateTime}
+        )
+    </insert>
+</mapper>
