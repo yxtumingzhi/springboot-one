@@ -15,6 +15,8 @@
  */
 package com.hope.one.service.impl;
 
+import cn.hutool.core.thread.ThreadFactoryBuilder;
+import com.hope.one.common.CommentUtils;
 import com.hope.one.entity.BladeNotice;
 import com.hope.one.mapper.BladeNoticeMapper;
 import com.hope.one.service.IBladeNoticeService;
@@ -22,13 +24,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * 通知公告表 服务实现类
@@ -43,15 +49,31 @@ public class BladeNoticeServiceImpl implements IBladeNoticeService {
     @Autowired
     private BladeNoticeMapper bladeNoticeMapper;
 
+    @Autowired
+    CommentUtils commentUtils;
+    @Autowired
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
     @Override
     public BladeNotice selectById(Long id) {
         return bladeNoticeMapper.selectById(id);
     }
 
-
     @Override
     public void test() {
-
+//        for (int i = 0; i < 1; i++) {
+//            executor.execute(() -> {
+//                System.out.println(LocalDateTime.now() + "  " + Thread.currentThread().getId() + " " + Thread.currentThread().getName());
+//            });
+//        }
+//        for (int i = 0; i < 100; i++) {
+//            executor.execute(() -> {
+//                long id = Thread.currentThread().getId();
+//                System.out.println(LocalDateTime.now() + "  " + id + " " + Thread.currentThread().getName());
+//            });
+//        }
+        commentUtils.say();
+        System.out.println("System.out.println:::" + threadPoolTaskExecutor.toString());
     }
 
     //@Async("taskExecutor")

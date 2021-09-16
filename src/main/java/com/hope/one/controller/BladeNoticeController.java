@@ -99,4 +99,9 @@ public class BladeNoticeController {
         System.out.println(bladeNotice.getCreateTime());
         return bladeNotice;
     }
+
+    @GetMapping("getBladeNotice111")
+    public void getBladeNotice111() {
+        bladeNoticeService.test();
+    }
 }
