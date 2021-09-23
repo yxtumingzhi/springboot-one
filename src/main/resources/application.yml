@@ -36,7 +36,7 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
 
-#Mybatis
+#Mybatis111111
 mybatis:
   mapper-locations: classpath:com/hope/one/mapper/*.xml
   type-aliases-package: com.hope.one.entity
