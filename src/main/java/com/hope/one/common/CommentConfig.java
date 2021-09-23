@@ -1,6 +1,9 @@
 package com.hope.one.common;
 
 
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -22,5 +25,13 @@ public class CommentConfig {
         executor.setThreadNamePrefix("tumingzhi-async-executor-");
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return executor;
+    }
+
+    @Bean
+    public RedissonClient redisson() {
+        // 单机模式
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://192.168.19.129:36379").setDatabase(0);
+        return Redisson.create(config);
     }
 }

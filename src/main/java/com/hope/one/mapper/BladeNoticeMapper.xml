@@ -35,12 +35,41 @@
     </update>
 
     <insert id="insert">
-        insert into blade_notice(title, category, release_time, create_time, update_time)
-        values (#{bladeNotice.title},
-        #{bladeNotice.category},
-        #{bladeNotice.releaseTime},
-        #{bladeNotice.createTime},
-        #{bladeNotice.updateTime}
+        insert into blade_notice
+            (tenant_id,title, category, release_time, content,create_user,create_time, update_user,update_time,status,is_deleted)
+        values
+        (       #{bladeNotice.tenantId},
+                #{bladeNotice.title},
+                #{bladeNotice.category},
+                #{bladeNotice.releaseTime},
+                #{bladeNotice.content},
+                #{bladeNotice.createUser},
+                #{bladeNotice.createTime},
+                #{bladeNotice.updateUser},
+                #{bladeNotice.updateTime},
+                #{bladeNotice.status},
+                #{bladeNotice.isDeleted}
         )
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO blade_notice
+        (tenant_id,title, category, release_time, content,create_user,create_time, update_user,update_time,status,is_deleted)
+        VALUES
+        <foreach collection="list" item="bladeNotice" separator=",">
+            (
+            #{bladeNotice.tenantId},
+            #{bladeNotice.title},
+            #{bladeNotice.category},
+            #{bladeNotice.releaseTime},
+            #{bladeNotice.content},
+            #{bladeNotice.createUser},
+            #{bladeNotice.createTime},
+            #{bladeNotice.updateUser},
+            #{bladeNotice.updateTime},
+            #{bladeNotice.status},
+            #{bladeNotice.isDeleted}
+            )
+        </foreach>
     </insert>
 </mapper>
