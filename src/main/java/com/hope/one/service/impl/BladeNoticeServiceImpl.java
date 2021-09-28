@@ -25,6 +25,7 @@ import com.hope.one.mapper.BladeNoticeMapper;
 import com.hope.one.service.IBladeNoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -74,8 +75,9 @@ public class BladeNoticeServiceImpl implements IBladeNoticeService {
 //                System.out.println(LocalDateTime.now() + "  " + id + " " + Thread.currentThread().getName());
 //            });
 //        }
-        commentUtils.say();
-        System.out.println("System.out.println:::" + threadPoolTaskExecutor.toString());
+//        commentUtils.say();
+//        System.out.println("System.out.println:::" + threadPoolTaskExecutor.toString());
+      // System.out.println("System.out.println:::" +code);
     }
 
     //@Async("taskExecutor")

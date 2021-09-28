@@ -20,7 +20,7 @@ spring:
     virtual-host: /tumingzhi
   redis:
     database: 0
-    host: 192.168.19.128
+    host: 192.168.19.129
     port: 36379
     password: ttx2011
 
@@ -45,3 +45,20 @@ mybatis:
 
 logging:
   config: classpath:log/logback-config.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ['*']
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+    health:
+      show-details: always
