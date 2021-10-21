@@ -1,12 +1,15 @@
 package com.hope.one.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.DistributionSummary;
+import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author tumingzhi
@@ -26,6 +29,9 @@ public class PrometheusCustomMonitor {
      */
     private DistributionSummary amountSum;
 
+    private Gauge gauge;
+
+
     private final MeterRegistry registry;
 
     @Autowired
@@ -33,10 +39,11 @@ public class PrometheusCustomMonitor {
         this.registry = registry;
     }
 
-    @PostConstruct
+   // @PostConstruct
     private void init() {
         orderCount = registry.counter("order_request_count", "order", "test-svc");
         amountSum = registry.summary("order_amount_sum", "orderAmount", "test-svc");
+
     }
 
     public Counter getOrderCount() {

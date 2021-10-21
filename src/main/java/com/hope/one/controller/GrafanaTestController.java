@@ -23,12 +23,12 @@ public class GrafanaTestController {
     private MeterRegistry meterRegistry;
     private Counter counter;
 
-    @PostConstruct
+   // @PostConstruct
     public void init() {
-        Tags tags = Tags.of("common", "test");
+      //  Tags tags = Tags.of("common", "test");
         // 公共标签
-        meterRegistry.config().commonTags(tags);
-        counter = Counter.builder("metrics.request.common").register(meterRegistry);
+       // meterRegistry.config().commonTags(tags);
+        //counter = Counter.builder("metrics.request.common").register(meterRegistry);
     }
 
     /**

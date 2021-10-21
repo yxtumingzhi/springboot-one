@@ -16,6 +16,7 @@
 package com.hope.one.mapper;
 
 
+import com.hope.one.common.Metrics;
 import com.hope.one.entity.BladeNotice;
 import org.apache.ibatis.annotations.Param;
 
@@ -43,6 +44,6 @@ public interface BladeNoticeMapper {
 
     void insertBatch(@Param("list") List<BladeNotice> list);
 
-
+    List<Metrics> metrics();
 
 }

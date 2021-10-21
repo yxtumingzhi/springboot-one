@@ -1,0 +1,1 @@
+INSERT INTO `lcb_mars_misc_db`.`indicator_meter`(`indicator_code`, `indicator_name`, `type`, `join_field`, `deleted`) VALUES ('indicator_micro_registers_users_001', '店铺_总用户数', 'gauge', 'group_type,group_id,indicator_cycle', 0);

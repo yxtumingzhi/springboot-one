@@ -2,6 +2,7 @@ package com.hope.one;
 
 import cn.hutool.core.img.Img;
 import cn.hutool.core.io.FileUtil;
+import com.hope.one.common.RhdShop;
 import com.hope.one.common.ShareCourseUtils;
 import com.vdurmont.emoji.EmojiParser;
 import jdk.nashorn.internal.runtime.regexp.joni.Config;
@@ -22,6 +23,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 class OneApplicationTests {
@@ -77,24 +80,31 @@ class OneApplicationTests {
 
     @Test
     void contextLoads() {
-//        Demo demo = new Demo(1L);
-//        Demo demo1 = new Demo(2L);
-//        Demo demo2 = new Demo(3L);
-//        Demo demo3 = new Demo(14L);
-//        Demo demo4 = new Demo(5L);
-//        Demo demo5 = new Demo(6L);
-//        Demo demo6 = new Demo(12L);
-//        List<Demo> list = Lists.newArrayList(demo,
-//                demo1, demo2, demo3, demo4, demo5, demo6
-//        );
-//        Long max = list.stream().mapToLong(Demo::getId).max().orElse(0);
-//        System.out.println(max);
 
-        List keep = Lists.newArrayList(null, null, 1);
-        keep.removeAll(null);
-        System.out.println(keep);
-        System.out.println(keep.size());
+        List<RhdShop> rhdShops = Lists.newArrayList();
+        RhdShop a = new RhdShop();
+        a.setBrand("aBrand");
+        rhdShops.add(a);
 
+        RhdShop b = new RhdShop();
+        b.setBrand("bBrand");
+        rhdShops.add(b);
+
+        RhdShop c = new RhdShop();
+        c.setBrand("cBrand");
+        rhdShops.add(c);
+
+        RhdShop d = new RhdShop();
+        d.setBrand("dBrand");
+        rhdShops.add(d);
+
+        RhdShop e = new RhdShop();
+        e.setBrand("aaa");
+        rhdShops.add(e);
+
+        Map<String, List<RhdShop>> listMap = rhdShops.stream().collect(Collectors.groupingBy(RhdShop::getBrand));
+
+        System.out.println(listMap);
     }
 
     @Test

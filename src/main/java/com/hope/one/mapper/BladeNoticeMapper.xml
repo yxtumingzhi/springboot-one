@@ -19,6 +19,11 @@
         <result column="is_deleted" property="isDeleted"/>
     </resultMap>
 
+    <resultMap id="baseResultMap2" type="com.hope.one.common.Metrics">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="baseColumnList">
@@ -28,6 +33,10 @@
 
     <select id="selectById" resultMap="baseResultMap">
         select * from blade_notice where id = #{id}
+    </select>
+
+    <select id="metrics" resultMap="baseResultMap2">
+        select id,indicator_name name,type from indicator_meter
     </select>
 
     <update id="update">

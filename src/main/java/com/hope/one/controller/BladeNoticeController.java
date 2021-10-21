@@ -16,30 +16,21 @@
 package com.hope.one.controller;
 
 
-import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.google.common.collect.Lists;
 import com.hope.one.common.Singleton;
 import com.hope.one.entity.BladeNotice;
 import com.hope.one.mapper.BladeNoticeMapper;
-import com.hope.one.req.Request;
-import com.hope.one.service.IBladeNoticeService;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.prometheus.client.Gauge;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.management.ObjectName;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
@@ -54,6 +45,8 @@ import java.util.stream.Collectors;
 public class BladeNoticeController {
     @Resource
     private PrometheusCustomMonitor monitor;
+    @Resource
+    private MeterRegistry registry;
 
     @RequestMapping("/order")
     public String order() throws Exception {
@@ -63,6 +56,7 @@ public class BladeNoticeController {
         int amount = random.nextInt(100);
         // 统计金额
         monitor.getAmountSum().record(amount);
+
         return "下单成功, 金额: " + amount;
     }
 
@@ -153,7 +147,7 @@ public class BladeNoticeController {
         bladeNotice.setCreateTime(LocalDateTime.of(2021, 7, 12, 10, 40, 12, 100000000));
         bladeNotice.setReleaseTime(LocalDateTime.of(2021, 7, 12, 10, 40, 12, 569000000));
         bladeNoticeMapper.insert(bladeNotice);
-        List<String> strs = Lists.newArrayList("1","2","3");
+        List<String> strs = Lists.newArrayList("1", "2", "3");
         strs.stream().collect(Collectors.joining(","));
         return "adfa";
     }
