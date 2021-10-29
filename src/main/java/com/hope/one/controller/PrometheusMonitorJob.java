@@ -36,7 +36,6 @@ public class PrometheusMonitorJob {
     @Scheduled(cron = "0/50 * * * * ?")
     void doSomethingWith() {
         log.info("定时任务开始......");
-        log.info("定时任务开始......" + registry.getMeters().stream().map(o -> o.getId().getName()).collect(Collectors.toList()));
         List<Metrics> metrics = bladeNoticeMapper.metrics();
         if (CollectionUtil.isEmpty(metrics)) {
             return;
@@ -88,7 +87,6 @@ public class PrometheusMonitorJob {
                 );
                 registry.gauge("indicator_micro_registers_users_100", tags, atomicVar);
                 atomicVar.set(var);
-                log.info("atomicVar.set(var):" + var);
                 break;
             case "distribution_summary":
                 registry.summary(metric.getName()).record(var);
@@ -112,7 +110,6 @@ public class PrometheusMonitorJob {
                 break;
             case GAUGE:
                 atomicVar.set(var);
-                log.info("atomicVar.set(var):" + var);
                 break;
             case DISTRIBUTION_SUMMARY:
                 ((DistributionSummary) meter).record(var);

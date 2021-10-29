@@ -1,20 +1,25 @@
 package com.hope.one;
 
-import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
-import com.hope.one.common.Item;
-import com.hope.one.es.ItemRepository;
-import org.assertj.core.util.Lists;
-import org.checkerframework.checker.units.qual.A;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.google.common.collect.Lists;
+import com.hope.one.es.Article;
+import com.hope.one.es.ArticleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +34,10 @@ public class IndexTest {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+    @Autowired
+    private ArticleRepository articleRepository;
+    @Autowired
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @Test
     public void testCreate() {

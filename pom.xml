@@ -47,10 +47,24 @@
             <artifactId>guava</artifactId>
             <version>31.0-jre</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.data</groupId>-->
+<!--            <artifactId>spring-data-elasticsearch</artifactId>-->
+<!--            <version>4.2.0</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.data</groupId>-->
+<!--            <artifactId>spring-data-elasticsearch</artifactId>-->
+<!--&lt;!&ndash;            <version>3.0.5.RELEASE</version>&ndash;&gt;-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
+
+
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
@@ -78,6 +92,12 @@
             <version>5.3.10</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring-boot-starter -->
+<!--        <dependency>-->
+<!--            <groupId>org.activiti</groupId>-->
+<!--            <artifactId>activiti-spring-boot-starter</artifactId>-->
+<!--            <version>7.1.0.M6</version>-->
+<!--        </dependency>-->
 
         <!--数据库连接池-->
         <dependency>
@@ -91,6 +111,11 @@
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!--Mybatis generator 自动生成相关文件 依赖-->

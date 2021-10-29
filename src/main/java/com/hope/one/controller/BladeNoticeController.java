@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import com.hope.one.common.Singleton;
 import com.hope.one.entity.BladeNotice;
 import com.hope.one.mapper.BladeNoticeMapper;
+import com.hope.one.service.IBladeNoticeService;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.prometheus.client.Gauge;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,8 @@ public class BladeNoticeController {
     private PrometheusCustomMonitor monitor;
     @Resource
     private MeterRegistry registry;
+    @Autowired
+    private IBladeNoticeService bladeNoticeService;
 
     @RequestMapping("/order")
     public String order() throws Exception {
@@ -155,9 +158,9 @@ public class BladeNoticeController {
 
     @GetMapping("getBladeNotice/{id}")
     public BladeNotice getBladeNotice(@PathVariable("id") Long id) {
-        //BladeNotice bladeNotice = bladeNoticeService.selectById(id);
-        // System.out.println(bladeNotice.getReleaseTime());
-        //System.out.println(bladeNotice.getCreateTime());
+        BladeNotice bladeNotice = bladeNoticeService.selectById(id);
+        System.out.println(bladeNotice.getReleaseTime());
+        System.out.println(bladeNotice.getCreateTime());
         return null;
     }
 

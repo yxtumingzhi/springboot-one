@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author tumingzhi
@@ -123,6 +125,11 @@ public class KafkaProducer {
        // kafkaTemplate.send("ads_kudu2es", JSONObject.toJSONString(JSONObject.parseObject(data2)));
 
         Data da = new Data();
+        int[] nums = new int[]{1,3,4};
+        int a = nums.length;
+        HashMap<String,String> map = new HashMap<>();
+
+
 
         DataItem item = new DataItem("indicator_micro_track_uv_004","day",58,2,26);
         DataItem item2 = new DataItem("indicator_micro_track_uv_004","day",10062,8,11);
