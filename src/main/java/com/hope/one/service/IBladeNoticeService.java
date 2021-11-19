@@ -31,4 +31,6 @@ public interface IBladeNoticeService {
     void test();
 
     void testAsync();
+
+    void fetch(Long id);
 }

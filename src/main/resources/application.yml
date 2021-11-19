@@ -1,18 +1,129 @@
 server:
   port: 5001
 
+windTemple:
+  config: '{
+    "makeDealPoolIncrease":500,
+    "clueRetentionRewardPartner":500,
+    "clueDriveRewardPartner":500,
+    "refereeMakeDealRewardPartner":500,
+    "refereeMakeDealRewardReferee":500,
+    "shareImageList":[
+        "https://lcbqiniu.lechebangstatic.com//test/202111081349001.jpg",
+        "https://lcbqiniu.lechebangstatic.com//test/202111081349001.jpg",
+        "https://lcbqiniu.lechebangstatic.com//test/202111081349001.jpg"
+    ],
+    "partnerTitleSet":[
+        {
+            "title":"殿主",
+            "carNumStart":50,
+            "carNumEnd":100,
+            "eachReward":500
+        },
+        {
+            "title":"光明左使",
+            "carNumStart":20,
+            "carNumEnd":49,
+            "eachReward":500
+        },
+        {
+            "title":"光明又使",
+            "carNumStart":1,
+            "carNumEnd":19,
+            "eachReward":500
+        }
+    ],
+    "firstInPartnerMsg":"",
+    "firstInReceiveAccountMsg":""
+}'
 
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.19.128:30001/devloper_mztu?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://192.168.19.129:30001/devloper_mztu?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: ttx2011
 
+#  activiti:
+#    # 开启历史库
+#    db-history-used: true
+#    history-level: audit
+
+  kafka:
+    bootstrap-servers: cdh1.lcbint.cn:9092,cdh2.lcbint.cn:9092,cdh3.lcbint.cn:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      enable-auto-commit: true
+      properties:
+        group.id: testGroup-one
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      missing-topics-fatal: false
+
+
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: 192.168.19.129:9200
+      repositories:
+        enabled: true
+
+  ###########【Kafka集群】###########
+  #spring.kafka.bootstrap-servers=112.126.74.249:9092,112.126.74.249:9093
+  ###########【初始化生产者配置】###########
+  # 重试次数
+  # spring.kafka.producer.retries=0
+  # 应答级别:多少个分区副本备份完成时向生产者发送ack确认(可选0、1、all/-1)
+  # spring.kafka.producer.acks=1
+  # 批量大小
+  #spring.kafka.producer.batch-size=16384
+  # 提交延时
+  #spring.kafka.producer.properties.linger.ms=0
+  # 当生产端积累的消息达到batch-size或接收到消息linger.ms后,生产者就会将消息提交给kafka
+  # linger.ms为0表示每接收到一条消息就提交给kafka,这时候batch-size其实就没用了
+
+  # 生产端缓冲区大小
+  #spring.kafka.producer.buffer-memory = 33554432
+  # Kafka提供的序列化和反序列化类
+  #spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+  #spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+  # 自定义分区器
+  # spring.kafka.producer.properties.partitioner.class=com.felix.kafka.producer.CustomizePartitioner
+
+  ###########【初始化消费者配置】###########
+  # 默认的消费组ID
+  # spring.kafka.consumer.properties.group.id=defaultConsumerGroup
+  # 是否自动提交offset
+  # spring.kafka.consumer.enable-auto-commit=true
+  # 提交offset延时(接收到消息后多久提交offset)
+  # spring.kafka.consumer.auto.commit.interval.ms=1000
+  # 当kafka中没有初始offset或offset超出范围时将自动重置offset
+  # earliest:重置为分区中最小的offset;
+  # latest:重置为分区中最新的offset(消费分区中新产生的数据);
+  # none:只要有一个分区不存在已提交的offset,就抛出异常;
+  #spring.kafka.consumer.auto-offset-reset=latest
+  # 消费会话超时时间(超过这个时间consumer没有发送心跳,就会触发rebalance操作)
+  # spring.kafka.consumer.properties.session.timeout.ms=120000
+  # 消费请求超时时间
+  # spring.kafka.consumer.properties.request.timeout.ms=180000
+  # Kafka提供的序列化和反序列化类
+  #spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+  # spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+  # 消费端监听的topic不存在时，项目启动会报错(关掉)
+  # spring.kafka.listener.missing-topics-fatal=false
+  # 设置批量消费
+  # spring.kafka.listener.type=batch
+  # 批量消费每次最多消费多少条消息
+  # spring.kafka.consumer.max-poll-records=50
+
   #配置rabbitMq 服务器
   rabbitmq:
-    host: 192.168.19.128
+    host: 192.168.19.129
     port: 35672
     username: ttx
     password: ttx2011
@@ -20,11 +131,11 @@ spring:
     virtual-host: /tumingzhi
   redis:
     database: 0
-    host: 192.168.19.128
+    host: 192.168.19.129
     port: 36379
     password: ttx2011
 
-###ThymeLeaf配置
+  ###ThymeLeaf配置
   thymeleaf:
     #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
     mode: HTML5
@@ -45,3 +156,20 @@ mybatis:
 
 logging:
   config: classpath:log/logback-config.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ '*' ]
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+    health:
+      show-details: always

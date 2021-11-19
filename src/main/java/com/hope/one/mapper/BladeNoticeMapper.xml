@@ -19,6 +19,11 @@
         <result column="is_deleted" property="isDeleted"/>
     </resultMap>
 
+    <resultMap id="baseResultMap2" type="com.hope.one.common.Metrics">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="baseColumnList">
@@ -30,17 +35,50 @@
         select * from blade_notice where id = #{id}
     </select>
 
+    <select id="metrics" resultMap="baseResultMap2">
+        select id,indicator_name name,type from indicator_meter
+    </select>
+
     <update id="update">
          update blade_notice set title = #{title} where id = #{id}
     </update>
 
     <insert id="insert">
-        insert into blade_notice(title, category, release_time, create_time, update_time)
-        values (#{bladeNotice.title},
-        #{bladeNotice.category},
-        #{bladeNotice.releaseTime},
-        #{bladeNotice.createTime},
-        #{bladeNotice.updateTime}
+        insert into blade_notice
+            (tenant_id,title, category, release_time, content,create_user,create_time, update_user,update_time,status,is_deleted)
+        values
+        (       #{bladeNotice.tenantId},
+                #{bladeNotice.title},
+                #{bladeNotice.category},
+                #{bladeNotice.releaseTime},
+                #{bladeNotice.content},
+                #{bladeNotice.createUser},
+                #{bladeNotice.createTime},
+                #{bladeNotice.updateUser},
+                #{bladeNotice.updateTime},
+                #{bladeNotice.status},
+                #{bladeNotice.isDeleted}
         )
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO blade_notice
+        (tenant_id,title, category, release_time, content,create_user,create_time, update_user,update_time,status,is_deleted)
+        VALUES
+        <foreach collection="list" item="bladeNotice" separator=",">
+            (
+            #{bladeNotice.tenantId},
+            #{bladeNotice.title},
+            #{bladeNotice.category},
+            #{bladeNotice.releaseTime},
+            #{bladeNotice.content},
+            #{bladeNotice.createUser},
+            #{bladeNotice.createTime},
+            #{bladeNotice.updateUser},
+            #{bladeNotice.updateTime},
+            #{bladeNotice.status},
+            #{bladeNotice.isDeleted}
+            )
+        </foreach>
     </insert>
 </mapper>

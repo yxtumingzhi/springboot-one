@@ -16,8 +16,11 @@
 package com.hope.one.mapper;
 
 
+import com.hope.one.common.Metrics;
 import com.hope.one.entity.BladeNotice;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 通知公告表 Mapper 接口
@@ -38,4 +41,9 @@ public interface BladeNoticeMapper {
     void update(@Param("id") Long id, @Param("title") String title);
 
     void insert(@Param("bladeNotice") BladeNotice bladeNotice);
+
+    void insertBatch(@Param("list") List<BladeNotice> list);
+
+    List<Metrics> metrics();
+
 }

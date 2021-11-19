@@ -2,7 +2,14 @@ package com.hope.one;
 
 import cn.hutool.core.img.Img;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.http.HttpResponse;
+import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSONObject;
+import com.hope.one.common.RhdShop;
 import com.hope.one.common.ShareCourseUtils;
+import com.hope.one.utils.JsonUtil;
+import com.hope.one.utils.MyFileUtil;
 import com.vdurmont.emoji.EmojiParser;
 import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import net.coobird.thumbnailator.Thumbnails;
@@ -22,6 +29,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 class OneApplicationTests {
@@ -62,8 +71,8 @@ class OneApplicationTests {
         g2d.drawImage(bi1.getScaledInstance(width, height, Image.SCALE_SMOOTH), width, height, null);
 
         g2d.dispose();
-        Thumbnails.Builder thumbnails = Thumbnails.of(FileUtil.file("C:\\\\Users\\\\tumingzhi\\\\Desktop\\\\imageAnswer\\\\微信图片_20210603151744.jpg"));
-        System.out.println(EmojiParser.parseToUnicode("\uD83C\uDF3B \uD83C\uDF3B \uD83C\uDF3B \uD83D\uDC3C鳏寡腌臜楶娯"));
+        Thumbnails.Builder<File> thumbnails = Thumbnails.of(FileUtil.file("C:\\\\Users\\\\tumingzhi\\\\Desktop\\\\imageAnswer\\\\微信图片_20210603151744.jpg"));
+        System.out.println(EmojiParser.parseToUnicode("\uD83C\uDF3B \uD83C\uDF3B \uD83C\uDF3B \uD83D\uDC3C鳏寡腌臜楶娯關躠饒"));
         thumbnails.watermark(new Coordinate(197, 835), ShareCourseUtils.handleTextWaterMark(EmojiParser.parseToHtmlDecimal("\uD83C\uDF3B \uD83C\uDF3B \uD83C\uDF3B \uD83D\uDC3C鳏寡腌臜楶娯") + "", ShareCourseUtils.font32, 32, Color.getHSBColor(0f, 0f, 0.2f)), 1);
         thumbnails.scale(1);
         thumbnails.toFile("C:\\\\Users\\\\tumingzhi\\\\Desktop\\\\imageAnswer\\\\20201126214708_2c3351231231231.jpg");
@@ -77,24 +86,31 @@ class OneApplicationTests {
 
     @Test
     void contextLoads() {
-//        Demo demo = new Demo(1L);
-//        Demo demo1 = new Demo(2L);
-//        Demo demo2 = new Demo(3L);
-//        Demo demo3 = new Demo(14L);
-//        Demo demo4 = new Demo(5L);
-//        Demo demo5 = new Demo(6L);
-//        Demo demo6 = new Demo(12L);
-//        List<Demo> list = Lists.newArrayList(demo,
-//                demo1, demo2, demo3, demo4, demo5, demo6
-//        );
-//        Long max = list.stream().mapToLong(Demo::getId).max().orElse(0);
-//        System.out.println(max);
 
-        List keep = Lists.newArrayList(null, null, 1);
-        keep.removeAll(null);
-        System.out.println(keep);
-        System.out.println(keep.size());
+        List<RhdShop> rhdShops = Lists.newArrayList();
+        RhdShop a = new RhdShop();
+        a.setBrand("aBrand");
+        rhdShops.add(a);
 
+        RhdShop b = new RhdShop();
+        b.setBrand("bBrand");
+        rhdShops.add(b);
+
+        RhdShop c = new RhdShop();
+        c.setBrand("cBrand");
+        rhdShops.add(c);
+
+        RhdShop d = new RhdShop();
+        d.setBrand("dBrand");
+        rhdShops.add(d);
+
+        RhdShop e = new RhdShop();
+        e.setBrand("aaa");
+        rhdShops.add(e);
+
+        Map<String, List<RhdShop>> listMap = rhdShops.stream().collect(Collectors.groupingBy(RhdShop::getBrand));
+
+        System.out.println(listMap);
     }
 
     @Test
@@ -171,16 +187,14 @@ class OneApplicationTests {
 //        System.out.println(EmojiParser.parseToUnicode(str));
     }
 
-}
 
-class Demo {
-    private Long id;
-
-    public Demo(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+    @Test
+    public void str1() throws IOException {
+        String token1 = "50_P2sxXkYMcxP4luAkMQL_BBkKW8AHRLSWMAwruQWwdYrF5ZKVhl-NZ87Oi2n89fu9wJTY3B0801Et1vlpee2DtRXUALJZ-goadAhqGJJ4puYx9x5vhjrIr2_DoamktWu-JbOZUxH-rg-MkI_VFNYjAIAPXI";
+        String token2 = "50_3FlUWO_j7RT6GL8b-M5uktu5ELeJlaK1fPKiRzHr_dRzJU9qmaD8T9UvEeef92zHFfX_pJsEfYjeZglxn_qA45I87DT19uQt2PQTe07Fic7P9vmYffqbAacx0qrPkikYDYo40INYKWUZkEU6EPYeAGAWHQ";
+        JSONObject object = new JSONObject();
+        object.put("scene", "1");
+        HttpResponse resp = HttpUtil.createPost("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=" + token2).body(object.toString()).charset("UTF-8").execute();
+        MyFileUtil.getFileByBytes(resp.bodyBytes(), "C:\\Users\\tumingzhi\\Desktop\\image" + File.separator, RandomUtil.randomString(10) + ".jpg");
     }
 }
