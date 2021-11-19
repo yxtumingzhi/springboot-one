@@ -13,11 +13,6 @@ public class Demo3 {
 
     public void bTask() {
         System.out.println(Thread.currentThread().getName() + ":" + " --> B任务执行一次");
-
-        HashMap map = new HashMap();
-        map.put();
-        ThreadPoolTaskExecutor
-
     }
 
 }

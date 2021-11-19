@@ -166,6 +166,6 @@ public class BladeNoticeController {
 
     @GetMapping("getBladeNotice111")
     public void getBladeNotice111() {
-        //bladeNoticeService.test();
+        bladeNoticeService.testAsync();
     }
 }

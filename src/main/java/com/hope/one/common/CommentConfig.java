@@ -1,6 +1,7 @@
 package com.hope.one.common;
 
 
+import org.elasticsearch.client.RequestOptions;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -13,6 +14,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 public class CommentConfig {
+
+    static {
+        System.out.println("lalalalalalalalalaalalalal");
+    }
 
     @Bean(name = "threadPoolTaskExecutor")
     public ThreadPoolTaskExecutor getThreadPoolTaskExecutor() {
@@ -31,7 +36,9 @@ public class CommentConfig {
     public RedissonClient redisson() {
         // 单机模式
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://192.168.19.129:36379").setDatabase(0);
+        config.useSingleServer().setAddress("redis://192.168.19.129:36379").setDatabase(0)
+        .setPassword("ttx2011");
+        config.setLockWatchdogTimeout(1000);
         return Redisson.create(config);
     }
 }

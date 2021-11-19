@@ -55,6 +55,8 @@ public class BladeExecutorConfiguration extends AsyncConfigurerSupport {
 		executor.setKeepAliveSeconds(bladeAsyncProperties.getKeepAliveSeconds());
 		executor.setThreadNamePrefix("tumingzhi-async-executor-");
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+		System.out.println("System.out.println:::111111111111111111111111111111111111111" +"code");
+
 		return executor;
 	}
 

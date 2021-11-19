@@ -84,6 +84,8 @@ public class BladeNoticeServiceImpl implements IBladeNoticeService {
     @Async
     @Override
     public void testAsync() {
+        System.out.println("System.out.println:::" +"code");
+        System.out.println(Thread.currentThread().getName());
 //        String message = LocalDateTime.now().toString();
 //        log.info("do something, message={}", message);
 //        try {
@@ -91,23 +93,23 @@ public class BladeNoticeServiceImpl implements IBladeNoticeService {
 //        } catch (InterruptedException e) {
 //            log.error("do something error: ", e);
 //        }
-        List<BladeNotice> bladeNotices = new ArrayList<>(1000);
-        for (int i = 0; i < 5000; i++) {
-            BladeNotice bladeNotice = new BladeNotice();
-            bladeNotice.setTenantId(RandomUtil.randomNumbers(6));
-            bladeNotice.setTitle(RandomUtil.randomString(10));
-            bladeNotice.setCategory(RandomUtil.randomInt(0, 999999999));
-            bladeNotice.setReleaseTime(LocalDateTime.now().plusSeconds(RandomUtil.randomInt(0, 500)));
-            bladeNotice.setContent(RandomUtil.randomString(50));
-            bladeNotice.setCreateUser(0L);
-            bladeNotice.setCreateTime(LocalDateTime.now());
-            bladeNotice.setUpdateUser(0L);
-            bladeNotice.setUpdateTime(LocalDateTime.now());
-            bladeNotice.setStatus(0);
-            bladeNotice.setIsDeleted(0);
-            bladeNotices.add(bladeNotice);
-        }
-        bladeNoticeMapper.insertBatch(bladeNotices);
+//        List<BladeNotice> bladeNotices = new ArrayList<>(1000);
+//        for (int i = 0; i < 5000; i++) {
+//            BladeNotice bladeNotice = new BladeNotice();
+//            bladeNotice.setTenantId(RandomUtil.randomNumbers(6));
+//            bladeNotice.setTitle(RandomUtil.randomString(10));
+//            bladeNotice.setCategory(RandomUtil.randomInt(0, 999999999));
+//            bladeNotice.setReleaseTime(LocalDateTime.now().plusSeconds(RandomUtil.randomInt(0, 500)));
+//            bladeNotice.setContent(RandomUtil.randomString(50));
+//            bladeNotice.setCreateUser(0L);
+//            bladeNotice.setCreateTime(LocalDateTime.now());
+//            bladeNotice.setUpdateUser(0L);
+//            bladeNotice.setUpdateTime(LocalDateTime.now());
+//            bladeNotice.setStatus(0);
+//            bladeNotice.setIsDeleted(0);
+//            bladeNotices.add(bladeNotice);
+//        }
+//        bladeNoticeMapper.insertBatch(bladeNotices);
 
     }
 

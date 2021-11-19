@@ -1,6 +1,41 @@
 server:
   port: 5001
 
+windTemple:
+  config: '{
+    "makeDealPoolIncrease":500,
+    "clueRetentionRewardPartner":500,
+    "clueDriveRewardPartner":500,
+    "refereeMakeDealRewardPartner":500,
+    "refereeMakeDealRewardReferee":500,
+    "shareImageList":[
+        "https://lcbqiniu.lechebangstatic.com//test/202111081349001.jpg",
+        "https://lcbqiniu.lechebangstatic.com//test/202111081349001.jpg",
+        "https://lcbqiniu.lechebangstatic.com//test/202111081349001.jpg"
+    ],
+    "partnerTitleSet":[
+        {
+            "title":"殿主",
+            "carNumStart":50,
+            "carNumEnd":100,
+            "eachReward":500
+        },
+        {
+            "title":"光明左使",
+            "carNumStart":20,
+            "carNumEnd":49,
+            "eachReward":500
+        },
+        {
+            "title":"光明又使",
+            "carNumStart":1,
+            "carNumEnd":19,
+            "eachReward":500
+        }
+    ],
+    "firstInPartnerMsg":"",
+    "firstInReceiveAccountMsg":""
+}'
 
 spring:
   datasource:
