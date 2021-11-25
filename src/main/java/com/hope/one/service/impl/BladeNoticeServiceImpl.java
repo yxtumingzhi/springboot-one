@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 @Service
 public class BladeNoticeServiceImpl implements IBladeNoticeService {
 
-    @Resource
+    @Autowired
     private BladeNoticeMapper bladeNoticeMapper;
 
     @Autowired

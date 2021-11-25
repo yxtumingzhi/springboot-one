@@ -147,13 +147,6 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
 
-#Mybatis
-mybatis:
-  mapper-locations: classpath:com/hope/one/mapper/*.xml
-  type-aliases-package: com.hope.one.entity
-  configuration:
-    cache-enabled: true
-
 logging:
   config: classpath:log/logback-config.xml
 

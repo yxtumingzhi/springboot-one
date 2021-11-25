@@ -16,6 +16,7 @@
 package com.hope.one.mapper;
 
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hope.one.common.Metrics;
 import com.hope.one.entity.BladeNotice;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +29,7 @@ import java.util.List;
  * @author tumingzhi
  * @since 2021-02-02
  */
-public interface BladeNoticeMapper {
+public interface BladeNoticeMapper extends BaseMapper<BladeNotice> {
 
     /**
      * 查询
@@ -39,8 +40,6 @@ public interface BladeNoticeMapper {
     BladeNotice selectById(@Param("id") Long id);
 
     void update(@Param("id") Long id, @Param("title") String title);
-
-    void insert(@Param("bladeNotice") BladeNotice bladeNotice);
 
     void insertBatch(@Param("list") List<BladeNotice> list);
 

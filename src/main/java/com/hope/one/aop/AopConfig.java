@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @date 2021-10-29 11:41
  */
 @Configuration
-@ComponentScan(basePackages = "com.hope.one.aop")
+//@ComponentScan(basePackages = "com.hope.one.aop")
 // 开启AOP支持
 // 该注解中会使用Import注解导入后置处理器及注册自定义Bean用来完成AOP功能
 @EnableAspectJAutoProxy
