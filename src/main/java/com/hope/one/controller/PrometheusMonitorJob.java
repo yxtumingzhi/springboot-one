@@ -33,7 +33,7 @@ public class PrometheusMonitorJob {
 
     private final AtomicDouble atomicVar = new AtomicDouble(0);
 
-    @Scheduled(cron = "0/50 * * * * ?")
+    //@Scheduled(cron = "0/50 * * * * ?")
     void doSomethingWith() {
         log.info("定时任务开始......");
         List<Metrics> metrics = bladeNoticeMapper.metrics();

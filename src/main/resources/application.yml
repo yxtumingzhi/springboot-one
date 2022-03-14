@@ -51,16 +51,16 @@ spring:
 #    history-level: audit
 
   kafka:
-    bootstrap-servers: cdh1.lcbint.cn:9092,cdh2.lcbint.cn:9092,cdh3.lcbint.cn:9092
+    bootstrap-servers: kafka.lcbint.cn:9092,kafka2.lcbint.cn:9092,kafka3.lcbint.cn:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      enable-auto-commit: true
-      properties:
-        group.id: testGroup-one
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    consumer:
+#      enable-auto-commit: true
+#      properties:
+#        group.id: testGroup-one
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     listener:
       missing-topics-fatal: false
 
